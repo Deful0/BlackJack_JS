@@ -1,0 +1,42 @@
+<!DOCTYPE html> 
+<html> 
+    <head> 
+        <meta charset="UTF-8">
+        <title>BlackJack</title> 
+    </head> 
+    <body style="background-color: #184401;"> 
+
+        <p style="text-align: center; font-size: 40px; color:rgb(1, 173, 179)"><b>BlackJack</b></p>
+        
+        <p style="text-align: center; font-size: 30px;">
+            <b>
+            <span id="dillerCard1" style="color: aliceblue;">|???|</span>
+            <span id="dillerCard2" style="color: aliceblue;">|???|</span>
+            <span id="dillerCard3" style="color: aliceblue;"></span>
+            <span id="dillerCard4" style="color: aliceblue;"></span>
+            </b>
+        </p>
+
+        <p style="text-align: center; font-size: 30px; color: #f56e00;">Счет диллера: <span id="dillerCount" style="color:#f50000;">0</span></p>
+
+        <button onclick="startButton()" style="display: block; margin: 0 auto; size: 30px; background-color: #184401; color: aliceblue;">Начать</button>
+
+        <p style="text-align: center; font-size: 30px;">
+            <b>
+            <span id="playerCard1" style="color: aliceblue;">|???|</span>
+            <span id="playerCard2" style="color: aliceblue;">|???|</span>
+            <span id="playerCard3" style="color: aliceblue;"></span>
+            <span id="playerCard4" style="color: aliceblue;"></span>
+            </b>
+        </p>
+
+        <p style="text-align: center; font-size: 30px; color: #f56e00;">Счет игрока: <span id="playerCount" style="color:#f50000;">0</span></p>
+
+        <button onclick="getCard()" style="display: block; margin: 0 auto;color: #f50000; background-color: #184401; color: aliceblue;">Взять карту</button>  
+        <button onclick="stopCard()" style="display: block; margin: 0 auto; color: #f50000; background-color: #184401; color: aliceblue;">Хватит</button> 
+
+        <script src="blackjack.js">
+        </script>
+    
+    </body> 
+</html>
