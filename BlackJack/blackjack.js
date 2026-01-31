@@ -1,5 +1,5 @@
 // BlackJack
-alert("Добро пожаловать в BlackJack \nНеобходимо набрать больше очков, чем диллер. Но не более 21!\nПосле каждой игры необходимо обновить страницу.")
+alert("Добро пожаловать в BlackJack \nНеобходимо набрать больше очков, чем диллер. \nНо не более 21!")
 // инициализация переменных
 let rand_cardD1 = 0;
 let rand_cardD2 = 0;
@@ -21,6 +21,9 @@ let cardPlayer1 = "";
 let cardPlayer2 = "";
 let cardPlayer3 = "";
 let cardPlayer4 = "";
+
+let stavka = 10;
+let fishki = 100;
 
 let countB = 0;
 
@@ -88,8 +91,28 @@ const coloda = {
 };
 
 
+function addStavka() {
+    if (stavka < fishki){
+        stavka += 10;
+        document.getElementById("lableStavka").innerHTML = stavka;
+    }
+}
+
+function minStavka() {
+    if (stavka > 10){
+        stavka -= 10;
+        document.getElementById("lableStavka").innerHTML = stavka;
+    }
+}
+
 // Кнопка начала игры
 function startButton() {
+    reset_game();
+
+    stavka, fishki = getFiSt();
+    fishki -= stavka;
+    document.getElementById("fishki").innerHTML = fishki;
+
     rand_cardD1 = getRandom();
     cartDiller1 = coloda[rand_cardD1];
 
@@ -110,6 +133,10 @@ function startButton() {
     document.getElementById("playerCount").innerHTML = player_score(rand_cardP1, rand_cardP2);
     if (document.getElementById("playerCount").innerHTML == 21) {
         alert("Вы победили! \nУ вас 21 очко.");
+
+        stavka, fishki = getFiSt();
+        fishki += stavka * 2;
+        document.getElementById("fishki").innerHTML = fishki;
     }
 
 };
@@ -127,6 +154,8 @@ function getCard() {
         
         if (Number(document.getElementById("playerCount").innerHTML) > 21) {
             alert("Вы прогирали! \nПеребор.")
+            stavka = 10;
+            document.getElementById("lableStavka").innerHTML = stavka;
         }
     } if (countB == 2) {
         rand_cardP4 = getRandom();
@@ -137,6 +166,8 @@ function getCard() {
         
         if (Number(document.getElementById("playerCount").innerHTML) > 21) {
             alert("Вы прогирали! \nПеребор.")
+            stavka = 10;
+            document.getElementById("lableStavka").innerHTML = stavka;
         }
     }
     
@@ -155,6 +186,8 @@ function stopCard() {
 
     if (scoreD > scoreP) {
         alert("Вы проиграли! \nСчет диллера больше.")
+        stavka = 10;
+        document.getElementById("lableStavka").innerHTML = stavka;
     } else {
         rand_cardD3 = getRandom();
         cartDiller3 = coloda[rand_cardD3];
@@ -167,9 +200,15 @@ function stopCard() {
 
         if (scoreD > scoreP && scoreD < 22) {
             alert("Вы проиграли! \nСчет диллера больше.")
+            stavka = 10;
+            document.getElementById("lableStavka").innerHTML = stavka;
         }
         else{
             alert("Вы победили!")
+
+            stavka, fishki = getFiSt();
+            fishki += stavka * 2;
+            document.getElementById("fishki").innerHTML = fishki;
         }
 
     }
@@ -264,3 +303,34 @@ function player_score(key1, key2) {
 
     return score;
 };
+
+
+function reset_game() {
+    // Обнуляем карты диллера
+    document.getElementById("dillerCard1").innerHTML = "|???|";
+    document.getElementById("dillerCard2").innerHTML = "|???|";
+    document.getElementById("dillerCard3").innerHTML = "";
+    document.getElementById("dillerCard4").innerHTML = "";
+
+    // Обнуляем карты игрока
+    document.getElementById("playerCard1").innerHTML = "|???|";
+    document.getElementById("playerCard2").innerHTML = "|???|";
+    document.getElementById("playerCard3").innerHTML = "";
+    document.getElementById("playerCard4").innerHTML = "";
+
+    // Обнуляем счет игрока и диллера
+    document.getElementById("dillerCount").innerHTML = 0;
+    document.getElementById("playerCount").innerHTML = 0;
+
+    // Int значение переменных
+    document.getElementById("fishki").innerHTML = fishki;
+    document.getElementById("lableStavka").innerHTML = stavka;
+    countB = 0;
+}
+
+function getFiSt() {
+    stavka = Number(document.getElementById("lableStavka").innerHTML);
+    fishki = Number(document.getElementById("fishki").innerHTML);
+    
+    return stavka, fishki;
+}
